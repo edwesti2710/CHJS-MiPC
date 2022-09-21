@@ -40,12 +40,14 @@ let carrito = [];
 
 // Recuperando datos del carrito
 let carritoJSON = localStorage.getItem('carritoJSON');
+// console.log(carritoJSON);
+if (carritoJSON !== null) {
 carritoParsed = JSON.parse(carritoJSON)
 carritoParsed.forEach(item =>{
     // id, categoria, name, socket, brand, img, price0,c arrito)
     carrito.push(new Product(item.id,item.categoria, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
 })
-drawCarrito()
+drawCarrito()}
 
 
 
