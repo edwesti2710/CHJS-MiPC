@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Normalize -->
+    <link rel="stylesheet" href="./assets/styles/normalize.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <!-- Font Awesome 6.1.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <title>MiPC</title>
+</head>
+
+<body>
+    <header>
+        <div class="container central-limit">
+            <a href="./index.html">
+                <h1>MiPC</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+                <form action="recargarPagina" method="get">
+                    <input type="Searcher" name="search" placeholder="Buscar...">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </nav>
+            <div class="userOptions">
+                <a id="user" href="#">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <a id="shop" href="#">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div id="shopCarCount">
+                        <!-- <p>10</p> -->
+                        <i>10</i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <aside class="leftAside">
+            <section class="products">
+                <ul>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                </ul>
+            </section>
+
+            <section class="brands">
+                <ul>
+                    <li><a href="#">AMD</a></li>
+                </ul>
+            </section>
+        </aside>
+
+        <section class="itemsContainer">
+            <button class="navButton" id="btnBack"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="cards--container">
+                <article class="card">
+                    <div class="imgContainer">
+                        <div class="popUp">
+                            Compatible
+                        </div>
+                        <img src="./assets/img/AMD_Logo.svg" alt="AMD">
+                    </div>
+                    <div class="card--data">
+                        <h3>Nombre del Producto</h3>
+                        <div class="score">
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <button class="addToCart">
+                        <h4>S/. 500.00</h4><i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                </article>
+                <article class="card">
+                    <div class="imgContainer">
+                        <div class="popUp">
+                            Compatible
+                        </div>
+                        <img src="./assets/img/AMD_Logo.svg" alt="AMD">
+                    </div>
+                    <div class="card--data">
+                        <h3>Nombre del Producto</h3>
+                        <div class="score">
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <button class="addToCart">
+                        <h4>S/. 500.00</h4><i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                </article><article class="card">
+                    <div class="imgContainer">
+                        <div class="popUp">
+                            Compatible
+                        </div>
+                        <img src="./assets/img/AMD_Logo.svg" alt="AMD">
+                    </div>
+                    <div class="card--data">
+                        <h3>Nombre del Producto</h3>
+                        <div class="score">
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star gold"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <button class="addToCart">
+                        <h4>S/. 500.00</h4><i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                </article>
+            </div>
+            <button class="navButton active" id="btnNext"><i class="fa-solid fa-chevron-right"></i></button>
+        </section>
+
+        <aside class="rightAside">
+            <h2><i class="fa-solid fa-cart-shopping"></i> Carrito</h2>
+            <section class="cart">
+                <div class="cartItem">
+                    <div class="imgContainer">
+                        <img src="./assets/img/AMD_Logo.svg" alt="AMD">
+                    </div>
+                    <div class="data">
+                        <h4>Ryzen 5 2600X</h4>
+                        <div class="oncart">
+                            <h4>x1</h4>
+                            <h4>S/. 500.00</h4>
+                        </div>
+                    </div>
+                    <button><i class="fa-solid fa-cart-arrow-down"></i></button>
+                </div>
+                <div class="cartItem">
+                    <div class="imgContainer">
+                        <img src="./assets/img/AMD_Logo.svg" alt="AMD">
+                    </div>
+                    <div class="data">
+                        <h4>Ryzen 5 2600X</h4>
+                        <div class="oncart">
+                            <h4>x1</h4>
+                            <h4>S/. 500.00</h4>
+                        </div>
+                    </div>
+                    <button><i class="fa-solid fa-cart-arrow-down"></i></button>
+                </div>
+            </section>
+            <div class="cartTotal">
+                <h4>Total:</h4>
+                <h4>S/. 500.00</h4>
+            </div>
+        </aside>
+    </main>
+    <footer></footer>
+    <script src="./assets/js/index.js"></script>
+</body>
+
+</html>

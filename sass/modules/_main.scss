@@ -1,0 +1,237 @@
+main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .leftAside {
+        width: 24rem;
+        padding: 0 1.6rem;
+        height: calc(100vh - 10rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5rem;
+
+        .products {
+            max-height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $color3;
+            box-shadow: 0rem 0rem 2rem $color0;
+            border-radius: 2rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 1.2rem;
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                li {
+                    font-size: 1.4rem;
+                    width: 100%;
+                    a {
+                        padding: .5rem 3rem;
+                        color: $color4;
+                        font-weight: 600;
+
+                        &:hover {
+                            width: 100%;
+                            background-color: $color2;
+                        }
+                    }
+                }
+            }
+        }
+
+        .brands {
+            @extend .products;
+            background-color: $color2;
+        }
+    }
+
+    .itemsContainer {
+        // background-color: $color3;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        align-items: center;
+        padding: 2rem 1rem;
+
+        .navButton {
+            padding: 1rem;
+            border: none;
+            $background-color: $color5;
+        }
+        .active {
+            background-color: $color3;
+            cursor: pointer;
+        }
+
+        .cards--container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .card {
+                background-color: $color5;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                border-radius: 1rem;
+                align-items: center;
+                width: 24rem;
+                height: 24rem;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0rem 0rem 2rem $color0;
+                .imgContainer {
+                    width: 90%;
+                    height: 80%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .popUp {
+                        position: absolute;
+                        top: 0;
+                        background-color: $color3;
+                        width: 100%;
+                        text-align: center;
+                        font-size: 1.5rem;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        color: $color4;
+                    }
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                &--data {
+                    background-color: $color2;
+                    display: flex;
+                    flex-direction: column;
+                    gap: .2rem;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 1.6rem;
+                    padding: .5rem;
+
+                    h3 {
+                        font-size: 1.8rem;
+                        font-weight: 500;
+                        color: $color5
+                    }
+                    .score {
+                        font-size: 1.4rem;
+
+                        .gold {
+                            color: $color3;
+                        }
+                    }
+                }
+
+                .addToCart {
+                    width: 100%;
+                    height: 2rem;
+                    display: flex;
+                    gap: .5rem;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.4rem;
+                    border: none;
+                    background-color: $color3;
+                    color: $color5;
+                    padding: 1.2rem;
+                    cursor: pointer;
+                    h4{
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+    .rightAside {
+        background-color: $color3;
+        box-shadow: 0rem 0rem 2rem $color0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        width: 25rem;
+        h2{
+            color: $color4;
+            text-align: center;
+            padding: 1rem;
+        }
+        .cart{
+            .cartItem{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: .5rem;
+                background-color: $color2;
+                border: 1px solid $color3;
+                // padding: .2rem;
+                .imgContainer{
+                    width: 4rem;
+                    height: 4rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $color5;
+                    img {
+                        width: 90%;
+                    }
+                }
+                .data{
+                    display: flex;
+                    flex-direction: column;
+                    // align-self: center;
+                    padding: .5rem;
+                    width: 80%;
+                    gap: .5rem;
+                    :first-child{
+                        font-size: 1.4rem;
+                        align-self: center;
+                        color: $color4;
+                        text-overflow: ellipsis;
+                    }
+                    :last-child{
+                        display: flex;
+                        justify-content: space-between;
+                        color: $color4;
+                        h4 {
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+                button {
+                    background-color: $color3;
+                    padding: .6rem;
+                    font-size: 1.6rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+        }
+        .cartTotal {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 1.5rem;
+            color: $color4;
+            padding: 0.5rem;
+        }
+    }
+}

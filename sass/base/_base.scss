@@ -1,0 +1,45 @@
+$bp-1920: 120em;
+$bp-1600: 100em;
+$bp-1200: 75em;
+$bp-720: 45em;
+$bp-480: 30em;
+$bp-360: 22.5em;
+/**********************************/
+// Colores
+$color0: #000;
+$color1: #474744;
+$color2: #2994B2;
+$color3: #FFB400;
+$color4: #FFFBE0;
+$color5: #fff;
+// ***********************************
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+a,
+a:link,
+a:visited{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+img{
+    display: block;
+}
+body{
+    background-color: $color1;
+    font-family: sans-serif;
+}
