@@ -151,9 +151,11 @@ main {
   justify-content: space-around;
   align-items: center;
   flex-wrap: nowrap;
+  padding: 0 4rem;
 }
 main .leftAside {
-  width: 24rem;
+  width: 20vw;
+  max-width: 30rem;
   padding: 0 1.6rem;
   height: calc(100vh - 10rem);
   display: flex;
@@ -178,11 +180,13 @@ main .leftAside .products ul, main .leftAside .brands ul {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  align-content: center;
   gap: 1rem;
 }
 main .leftAside .products ul li, main .leftAside .brands ul li {
   font-size: 1.4rem;
   width: 100%;
+  text-align: center;
 }
 main .leftAside .products ul li a, main .leftAside .brands ul li a {
   padding: 0.5rem 3rem;
@@ -196,7 +200,11 @@ main .leftAside .products ul li a:hover, main .leftAside .brands ul li a:hover {
 main .leftAside .brands {
   background-color: #2994B2;
 }
+main .leftAside .brands ul li a:hover {
+  background-color: #FFB400;
+}
 main .itemsContainer {
+  width: 60vw;
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -232,7 +240,7 @@ main .itemsContainer .cards--container .card {
 }
 main .itemsContainer .cards--container .card .imgContainer {
   width: 90%;
-  height: 80%;
+  height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -249,7 +257,7 @@ main .itemsContainer .cards--container .card .imgContainer .popUp {
   color: #FFFBE0;
 }
 main .itemsContainer .cards--container .card .imgContainer img {
-  width: 100%;
+  width: 70%;
 }
 main .itemsContainer .cards--container .card--data {
   background-color: #2994B2;
@@ -287,6 +295,7 @@ main .itemsContainer .cards--container .card .addToCart {
   cursor: pointer;
 }
 main .itemsContainer .cards--container .card .addToCart h4 {
+  width: 100%;
   font-weight: 400;
 }
 main .rightAside {
@@ -296,7 +305,8 @@ main .rightAside {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: 25rem;
+  width: 20vw;
+  max-width: 30rem;
 }
 main .rightAside h2 {
   color: #FFFBE0;
