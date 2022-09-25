@@ -42,15 +42,13 @@ let carrito = [];
 let carritoJSON = localStorage.getItem('carritoJSON');
 // console.log(carritoJSON);
 if (carritoJSON !== null) {
-carritoParsed = JSON.parse(carritoJSON)
-carritoParsed.forEach(item =>{
-    // id, categoria, name, socket, brand, img, price0,c arrito)
-    carrito.push(new Product(item.id,item.categoria, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
-})
-drawCarrito()}
-
-
-
+    carritoParsed = JSON.parse(carritoJSON)
+    carritoParsed.forEach(item => {
+        // id, categoria, name, socket, brand, img, price0,c arrito)
+        carrito.push(new Product(item.id, item.categoria, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
+    })
+    drawCarrito()
+}
 
 categoriasHTML = document.querySelector(".products__ul");
 categoriasInner = '';
@@ -66,6 +64,7 @@ categorias.forEach(categoria => {
 })
 categoriasHTML.innerHTML = categoriasInner;
 
+drawCards(allProducts);
 
 function filterbyC(categoria) {
     let productsHTML = document.querySelector('.cards--container');
@@ -113,7 +112,7 @@ function filterbyCB(categoria, brand) {
     drawCards(productosFiltrados, categoria)
 }
 
-function drawCards(array, categoria) {
+function drawCards(array) {
     let productsHTML = document.querySelector('.cards--container');
     let productsInner = '';
     array.forEach(producto => {
@@ -133,7 +132,7 @@ function drawCards(array, categoria) {
                 <i class="fa-solid fa-star"></i>
             </div>
         </div>
-        <button category="${categoria}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${categoria}', '${producto.brand}', '${producto.id}')" class="addToCart">
+        <button category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.category}', '${producto.brand}', '${producto.id}')" class="addToCart">
             <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
         </button>
     </article>`
@@ -153,10 +152,30 @@ function addToCart(categoria, brand, id) {
     carritoJSON = JSON.stringify(carrito);
     localStorage.setItem('carritoJSON', carritoJSON);
     drawCarrito();
+    showToastfyAlert('Agregado al carrito', 2000)
 }
 
-function drawCarrito(){
-    carritoInner=''
+// Funcion para mostrar toast
+function showToastfyAlert(msj, duration) {
+    Toastify({
+        text: msj,
+        duration: duration,
+        // close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        // stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            // background: "linear-gradient(to right, #FFB400, #FFB400)",
+            background: "#FFB400",
+            border: "2px solid #2994B2",
+            fontSize: '16px',
+        },
+        onClick: function () { } // Callback after click
+    }).showToast();
+}
+
+function drawCarrito() {
+    carritoInner = ''
     carritoHTML = document.querySelector('.cart')
     carrito.forEach(item => {
         carritoInner += `<div class="cartItem">
@@ -186,5 +205,5 @@ function calcularPreciototal() {
     }
     document.querySelector(".cartTotal").innerHTML = `<h4>Total:</h4>
     <h4>${localMoneda} ${operaciones()}</h4>`
-    ;
+        ;
 }

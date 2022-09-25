@@ -148,15 +148,14 @@ header .container .userOptions #shop:hover .fa-cart-shopping {
 
 main {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
-  padding: 0 4rem;
+  padding: 0 1rem;
 }
 main .leftAside {
-  width: 20vw;
+  width: 20%;
   max-width: 30rem;
-  padding: 0 1.6rem;
   height: calc(100vh - 10rem);
   display: flex;
   flex-direction: column;
@@ -204,7 +203,7 @@ main .leftAside .brands ul li a:hover {
   background-color: #FFB400;
 }
 main .itemsContainer {
-  width: 60vw;
+  width: 70%;
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -284,7 +283,6 @@ main .itemsContainer .cards--container .card .addToCart {
   width: 100%;
   height: 2rem;
   display: flex;
-  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
@@ -297,21 +295,28 @@ main .itemsContainer .cards--container .card .addToCart {
 main .itemsContainer .cards--container .card .addToCart h4 {
   width: 100%;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 main .rightAside {
+  width: 20%;
+  max-width: 30rem;
   background-color: #FFB400;
   box-shadow: 0rem 0rem 2rem #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: 20vw;
-  max-width: 30rem;
 }
 main .rightAside h2 {
   color: #FFFBE0;
   text-align: center;
   padding: 1rem;
+}
+main .rightAside .cart {
+  max-height: 70vh;
+  overflow-x: auto;
 }
 main .rightAside .cart .cartItem {
   display: flex;
