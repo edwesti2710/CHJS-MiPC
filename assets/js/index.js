@@ -5,14 +5,13 @@ let step = 1;
 let localMoneda = 'S/.'
 
 //UI
-// Cart Butto
+// Cart Button
 let cartButton = document.getElementById('shop');
 let divCart = document.querySelector('.rightAside');
 cartButton.onclick = function () {
     divCart.classList.toggle('hidden');
     console.log('toggled');
 }
-
 
 // Constructor de Productos del Carrito
 class Product {
