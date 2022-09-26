@@ -404,6 +404,17 @@ main .rightAside .cartTotal {
   color: #FFFBE0;
   padding: 0.5rem;
 }
+main .rightAside .cartTotal #btnPagar {
+  background-color: #2994B2;
+  border: 1px solid #2994B2;
+  padding: 0.5rem 1rem;
+  color: #FFFBE0;
+  font-weight: 600;
+  cursor: pointer;
+}
+main .rightAside .cartTotal #btnPagar:hover {
+  box-shadow: 1px 1px 2px #000;
+}
 
 footer {
   height: 24rem;
