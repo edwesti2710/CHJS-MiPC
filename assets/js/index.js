@@ -65,6 +65,7 @@ function updateCartData() {
 }
 updateCartData()
 
+// Agregando las categorías de los productos
 categoriasHTML = document.querySelector(".products__ul");
 categoriasInner = '';
 let categorias = []
@@ -73,14 +74,13 @@ allProducts.forEach(product => {
     categorias.push(product.category);
     categorias = [...new Set(categorias)];
 })
-
 categorias.forEach(categoria => {
     categoriasInner += `<li><a href="#" id="btn${categoria}" onclick="filterbyC('${categoria}')">${categoria.toUpperCase()}</a></li>`
 })
 categoriasHTML.innerHTML = categoriasInner;
-
 drawCards(allProducts);
 
+// Filtrando por categorías
 function filterbyC(categoria) {
     let brands = [];
     const productosFiltrados = allProducts.filter(producto => producto.category === categoria);
@@ -89,6 +89,8 @@ function filterbyC(categoria) {
         brands = [...new Set(brands)];
     })
     drawCards(productosFiltrados);
+
+    // Generando las marcas de productos
     brandsHTML = document.querySelector('.brands__ul')
     brandsInner = '';
     brands.forEach(brand => {
@@ -97,11 +99,13 @@ function filterbyC(categoria) {
     brandsHTML.innerHTML = brandsInner;
 }
 
+// Filtrando por categorías y marcas
 function filterbyCB(categoria, brand) {
     const productos = allProducts.filter(producto => producto.category === categoria && producto.brand === brand);
     drawCards(productos, categoria)
 }
 
+// Funcion que convierte Arrays en los productos visibles
 function drawCards(array) {
     let productsHTML = document.querySelector('.cards--container');
     let productsInner = '';
@@ -130,6 +134,7 @@ function drawCards(array) {
     productsHTML.innerHTML = productsInner;
 }
 
+// Funcion para agregar al carrito
 function addToCart(id) {
     // Buscar en Carrito
     let productoSeleccionado = carrito.find(obj => obj.id == id)
@@ -149,6 +154,7 @@ function addToCart(id) {
     showToastfyAlert('Agregado al carrito', 2000)
 }
 
+// Funcion para quitar del carrito
 function removeFromCart(id) {
     carrito.splice(carrito.indexOf(carrito.find(obj => obj.id == id)), 1)
     drawCarrito();
@@ -156,6 +162,7 @@ function removeFromCart(id) {
     saveOnLocalStorage();
 }
 
+// Funcion que almacena el carrito en el localStorage
 function saveOnLocalStorage() {
     carritoJSON = JSON.stringify(carrito);
     localStorage.setItem('carritoJSON', carritoJSON);
@@ -177,6 +184,7 @@ function showToastfyAlert(msj, duration) {
     }).showToast();
 }
 
+// Funcion que dibuja el carrito desde el array
 function drawCarrito() {
     carritoInner = ''
     carritoHTML = document.querySelector('.cart')
