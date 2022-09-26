@@ -4,11 +4,21 @@ let ganancia = 1.1;
 let step = 1;
 let localMoneda = 'S/.'
 
+//UI
+// Cart Butto
+let cartButton = document.getElementById('shop');
+let divCart = document.querySelector('.rightAside');
+cartButton.onclick = function () {
+    divCart.classList.toggle('hidden');
+    console.log('toggled');
+}
+
+
 // Constructor de Productos del Carrito
 class Product {
-    constructor(id, categoria, name, socket, brand, img, price0, carrito) {
+    constructor(id, category, name, socket, brand, img, price0, carrito) {
         this.id = id;
-        this.categoria = categoria;
+        this.category = category;
         this.name = name;
         this.socket = socket;
         this.brand = brand;
@@ -18,7 +28,6 @@ class Product {
         this.finalPrice = function () { return Math.round((this.price0 * valorDolar) * ganancia); };
     }
 }
-
 
 // AllProducts
 const allProducts = [
@@ -45,10 +54,17 @@ if (carritoJSON !== null) {
     carritoParsed = JSON.parse(carritoJSON)
     carritoParsed.forEach(item => {
         // id, categoria, name, socket, brand, img, price0,c arrito)
-        carrito.push(new Product(item.id, item.categoria, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
+        carrito.push(new Product(item.id, item.category, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
     })
     drawCarrito()
 }
+
+// Colocando datos básicos del carrito
+function updateCartData() {
+    let shopCarCount = document.getElementById('shopCarCountI');
+    shopCarCount.innerHTML = carrito.length;
+}
+updateCartData()
 
 categoriasHTML = document.querySelector(".products__ul");
 categoriasInner = '';
@@ -82,7 +98,7 @@ function filterbyC(categoria) {
             <img src="${producto.img}" alt="${producto.name}">
         </div>
         <div class="card--data">
-            <h3>${producto.brand} - ${producto.name}</h3>
+            <h3>${producto.brand.toUpperCase()} - ${producto.name}</h3>
             <div class="score">
                 <i class="fa-solid fa-star gold"></i>
                 <i class="fa-solid fa-star gold"></i>
@@ -91,7 +107,7 @@ function filterbyC(categoria) {
                 <i class="fa-solid fa-star"></i>
             </div>
         </div>
-        <button category="${categoria}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${categoria}', '${producto.brand}', '${producto.id}')" class="addToCart">
+        <button title="Agregar al carrito" category="${categoria}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.id}')" class="addToCart">
             <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
         </button>
     </article>`
@@ -107,9 +123,8 @@ function filterbyC(categoria) {
 }
 
 function filterbyCB(categoria, brand) {
-    const productos = allProducts.filter(producto => producto.category === categoria);
-    const productosFiltrados = productos.filter(producto => producto.brand === brand);
-    drawCards(productosFiltrados, categoria)
+    const productos = allProducts.filter(producto => producto.category === categoria && producto.brand === brand);
+    drawCards(productos, categoria)
 }
 
 function drawCards(array) {
@@ -123,7 +138,7 @@ function drawCards(array) {
             <img src="${producto.img}" alt="${producto.name}">
         </div>
         <div class="card--data">
-            <h3>${producto.brand} - ${producto.name}</h3>
+            <h3>${producto.brand.toUpperCase()} - ${producto.name}</h3>
             <div class="score">
                 <i class="fa-solid fa-star gold"></i>
                 <i class="fa-solid fa-star gold"></i>
@@ -132,7 +147,7 @@ function drawCards(array) {
                 <i class="fa-solid fa-star"></i>
             </div>
         </div>
-        <button category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.category}', '${producto.brand}', '${producto.id}')" class="addToCart">
+        <button title="Agregar al carrito" category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.id}')" class="addToCart">
             <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
         </button>
     </article>`
@@ -140,19 +155,36 @@ function drawCards(array) {
     productsHTML.innerHTML = productsInner;
 }
 
-function addToCart(categoria, brand, id) {
-    productoSeleccionado = allProducts.find(obj => obj.id == id);
-    let getCount = parseInt(productoSeleccionado.carrito);
-    if (isNaN(getCount)) {
-        productoSeleccionado.carrito = 0;
-        carrito.push(productoSeleccionado);
+function addToCart(id) {
+    // Buscar en Carrito
+    let productoSeleccionado = carrito.find(obj => obj.id == id)
+    if (productoSeleccionado) {
+        productoSeleccionado.carrito++;
+    } else {
+        carrito.push(allProducts.find(obj => obj.id == id))
+        productoSeleccionado = carrito.find(obj => obj.id == id)
+        let getCount = parseInt(productoSeleccionado.carrito);
+        if (isNaN(getCount)) {
+            productoSeleccionado.carrito = 0;
+        }
+        productoSeleccionado.carrito++;
     }
-    getCount = parseInt(productoSeleccionado.carrito)
-    productoSeleccionado.carrito++;
+    drawCarrito();
+    updateCartData();
+    saveOnLocalStorage();
+    showToastfyAlert('Agregado al carrito', 2000)
+}
+
+function removeFromCart(id){
+    carrito.splice(carrito.indexOf(carrito.find(obj => obj.id == id)),1)
+    drawCarrito();
+    updateCartData();
+    saveOnLocalStorage();
+}
+
+function saveOnLocalStorage(){
     carritoJSON = JSON.stringify(carrito);
     localStorage.setItem('carritoJSON', carritoJSON);
-    drawCarrito();
-    showToastfyAlert('Agregado al carrito', 2000)
 }
 
 // Funcion para mostrar toast
@@ -160,12 +192,9 @@ function showToastfyAlert(msj, duration) {
     Toastify({
         text: msj,
         duration: duration,
-        // close: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        // stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "bottom",
+        position: "right",
         style: {
-            // background: "linear-gradient(to right, #FFB400, #FFB400)",
             background: "#FFB400",
             border: "2px solid #2994B2",
             fontSize: '16px',
@@ -189,7 +218,7 @@ function drawCarrito() {
                 <h4>${localMoneda} ${item.finalPrice() * item.carrito}</h4>
             </div>
         </div>
-        <button><i class="fa-solid fa-cart-arrow-down"></i></button>
+        <button title="Quitar del carrito" onclick="removeFromCart('${item.id}')"><i class="fa-solid fa-cart-arrow-down"></i></button>
     </div>`
     })
     carritoHTML.innerHTML = carritoInner;

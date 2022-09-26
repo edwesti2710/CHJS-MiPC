@@ -30,7 +30,7 @@
                     <li><a href="#">Nosotros</a></li>
                     <li><a href="#">Blog</a></li>
                 </ul>
-                <form action="recargarPagina" method="get">
+                <form action="" method="get">
                     <input type="Searcher" name="search" placeholder="Buscar...">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
@@ -42,8 +42,7 @@
                 <a id="shop" href="#">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <div id="shopCarCount">
-                        <!-- <p>10</p> -->
-                        <i>10</i>
+                        <i  id="shopCarCountI">5</i>
                     </div>
                 </a>
             </div>
@@ -69,7 +68,7 @@
             <button class="navButton active" id="btnNext"><i class="fa-solid fa-chevron-right"></i></button>
         </section>
 
-        <aside class="rightAside">
+        <aside class="rightAside hidden">
             <h2><i class="fa-solid fa-cart-shopping"></i> Carrito</h2>
             <section class="cart">
             </section>
@@ -79,7 +78,7 @@
             </div>
         </aside>
     </main>
-    <footer></footer>
+    <!-- <footer></footer> -->
     <script src="./assets/js/index.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
