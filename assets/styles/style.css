@@ -154,56 +154,86 @@ main {
   padding: 0 1rem;
 }
 main .leftAside {
-  width: 20%;
-  max-width: 30rem;
+  width: 18vw;
+  max-width: 24rem;
   height: calc(100vh - 10rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5rem;
 }
-main .leftAside .products, main .leftAside .brands {
+main .leftAside .products {
   max-height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #FFB400;
   box-shadow: 0rem 0rem 2rem #000;
-  border-radius: 2rem;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1.2rem;
+  padding: 1rem;
 }
-main .leftAside .products ul, main .leftAside .brands ul {
+main .leftAside .products ul {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   align-content: center;
   gap: 1rem;
-}
-main .leftAside .products ul li, main .leftAside .brands ul li {
-  font-size: 1.4rem;
   width: 100%;
-  text-align: center;
 }
-main .leftAside .products ul li a, main .leftAside .brands ul li a {
+main .leftAside .products ul li {
+  font-size: 1.4rem;
+  text-align: center;
+  width: 100%;
+}
+main .leftAside .products ul li a {
+  display: inline-block;
+  width: 100%;
   padding: 0.5rem 3rem;
   color: #FFFBE0;
   font-weight: 600;
 }
-main .leftAside .products ul li a:hover, main .leftAside .brands ul li a:hover {
-  width: 100%;
+main .leftAside .products ul li a:hover {
   background-color: #2994B2;
 }
 main .leftAside .brands {
+  max-height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #2994B2;
+  box-shadow: 0rem 0rem 2rem #000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+main .leftAside .brands ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+main .leftAside .brands ul li {
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+}
+main .leftAside .brands ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem 3rem;
+  color: #FFFBE0;
+  font-weight: 600;
 }
 main .leftAside .brands ul li a:hover {
   background-color: #FFB400;
 }
 main .itemsContainer {
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -231,15 +261,15 @@ main .itemsContainer .cards--container .card {
   justify-content: center;
   border-radius: 1rem;
   align-items: center;
-  width: 24rem;
-  height: 24rem;
+  width: 22rem;
+  height: 22rem;
   position: relative;
   overflow: hidden;
   box-shadow: 0rem 0rem 2rem #000;
 }
 main .itemsContainer .cards--container .card .imgContainer {
-  width: 90%;
-  height: 70%;
+  width: 60%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -256,7 +286,7 @@ main .itemsContainer .cards--container .card .imgContainer .popUp {
   color: #FFFBE0;
 }
 main .itemsContainer .cards--container .card .imgContainer img {
-  width: 70%;
+  width: 100%;
 }
 main .itemsContainer .cards--container .card--data {
   background-color: #2994B2;
@@ -265,11 +295,10 @@ main .itemsContainer .cards--container .card--data {
   gap: 0.2rem;
   width: 100%;
   text-align: center;
-  font-size: 1.6rem;
   padding: 0.5rem;
 }
 main .itemsContainer .cards--container .card--data h3 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: #fff;
 }
@@ -300,8 +329,8 @@ main .itemsContainer .cards--container .card .addToCart h4 {
   gap: 0.5rem;
 }
 main .rightAside {
-  width: 20%;
-  max-width: 30rem;
+  width: 50vw;
+  max-width: 24rem;
   background-color: #FFB400;
   box-shadow: 0rem 0rem 2rem #000;
   display: flex;
