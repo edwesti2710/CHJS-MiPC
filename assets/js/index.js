@@ -229,6 +229,6 @@ function compraSatisfactoria() {
         icon: 'success',
         confirmButtonText: 'Aceptar',
     }).then((result) => {
-        result['isConfirmed'] && ((localStorage.clear())( location.reload()))
+        result['isConfirmed'] && ((localStorage.removeItem('carritoJSON'))( location.reload()))
     })
 }
