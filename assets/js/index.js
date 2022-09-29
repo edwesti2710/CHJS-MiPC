@@ -1,8 +1,35 @@
+// Preloader
+function fadeOutEffect(fadeTarget) {
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            fadeTarget.style.display = 'none';
+        }
+    }, 50);
+}
+window.onload = function() {
+    fadeOutEffect(document.querySelector('.preloader'));
+}
+
+
 // // Variables Globales
-const valorDolar = 4;
+// let valorDolar = 4;
+let valorDolar = getData();
 let ganancia = 1.1;
 let step = 1;
 let localMoneda = 'S/.'
+
+// Get current exchange from API
+async function getData() {
+    const dataApi = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/pen.json');
+    const dataJson = await dataApi.json();
+    return valorDolar = await dataJson.pen;
+}
 
 //UI
 // Cart Button
