@@ -12,25 +12,28 @@ function fadeOutEffect(fadeTarget) {
         }
     }, 50);
 }
-window.onload = function() {
+window.onload = function () {
     fadeOutEffect(document.querySelector('.preloader'));
+    document.querySelector('main').classList.remove('hidden');
 }
 
 
 // // Variables Globales
-let valorDolar = 3.96;
-// let valorDolar = getData();
+let valorDolar;
 let ganancia = 1.1;
 let step = 1;
 let localMoneda = 'S/.'
 
 // Get current exchange from API
-// async function getData() {
-//     const dataApi = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/pen.json');
-//     const dataJson = await dataApi.json();
-//     return valorDolar = await dataJson.pen;
-// }
-
+async function getData() {
+    const dataApi = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/pen.json');
+    const dataJson = await dataApi.json();
+    valorDolar = await dataJson.pen;
+    await drawCarrito();
+    await updateCartData();
+    await drawCards(allProducts);
+}
+getData();
 
 //UI
 // Cart Button
@@ -83,7 +86,6 @@ if (carritoJSON !== null) {
         // id, categoria, name, socket, brand, img, price0,c arrito)
         carrito.push(new Product(item.id, item.category, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
     })
-    drawCarrito()
 }
 
 // Colocando datos básicos del carrito
@@ -91,7 +93,6 @@ function updateCartData() {
     let shopCarCount = document.getElementById('shopCarCountI');
     shopCarCount.innerHTML = carrito.length;
 }
-updateCartData()
 
 // Agregando las categorías de los productos
 categoriasHTML = document.querySelector(".products__ul");
@@ -106,7 +107,6 @@ categorias.forEach(categoria => {
     categoriasInner += `<li><a href="#" id="btn${categoria}" onclick="filterbyC('${categoria}')">${categoria.toUpperCase()}</a></li>`
 })
 categoriasHTML.innerHTML = categoriasInner;
-drawCards(allProducts);
 
 // Filtrando por categorías
 function filterbyC(categoria) {
@@ -257,6 +257,6 @@ function compraSatisfactoria() {
         icon: 'success',
         confirmButtonText: 'Aceptar',
     }).then((result) => {
-        result['isConfirmed'] && ((localStorage.removeItem('carritoJSON'))( location.reload()))
+        result['isConfirmed'] && ((localStorage.removeItem('carritoJSON'))(location.reload()))
     })
 }
