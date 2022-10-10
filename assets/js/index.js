@@ -103,7 +103,7 @@ function searching(event){
     event.preventDefault()
     let searchText = document.getElementById('inputSearch');
     console.log(searchText.value); 
-    let productosFiltrados = allProducts.filter(product => product.name.toUpperCase().search(searchText.value.toUpperCase()) > -1)
+    let productosFiltrados = allProducts.filter(product => `${product.brand} ${product.name}`.toUpperCase().search(searchText.value.toUpperCase()) > -1)
     drawCards(productosFiltrados, 1);
     console.table(productosFiltrados);
 }
