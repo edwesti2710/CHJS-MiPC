@@ -43,8 +43,8 @@
                     <li><a href="#">Blog</a></li>
                 </ul>
                 <form action="" method="get">
-                    <input type="Searcher" name="search" placeholder="Buscar...">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input id="inputSearch" type="Searcher" name="search" placeholder="Buscar..." onkeypress="handleKeyPress(event)">
+                    <button id="btnSearch" onclick="searching(event)"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </nav>
             <div class="userOptions">
@@ -74,10 +74,14 @@
         </aside>
 
         <section class="itemsContainer">
-            <button class="navButton" id="btnBack"><i class="fa-solid fa-chevron-left"></i></button>
+            <div id="btnBack">
+                <button class="navButton" onclick="drawCards(tempArray, 1)"><i class="fa-solid fa-chevron-left"></i></button>
+            </div>
             <div class="cards--container">
             </div>
-            <button class="navButton active" id="btnNext"><i class="fa-solid fa-chevron-right"></i></button>
+            <div id="btnNext">
+                <button class="navButton" id="btnNext" onclick="drawCards(tempArray, 0)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </section>
 
         <aside class="rightAside hidden">

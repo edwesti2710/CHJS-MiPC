@@ -21,8 +21,9 @@ window.onload = function () {
 // // Variables Globales
 let valorDolar;
 let ganancia = 1.1;
-let step = 1;
 let localMoneda = 'S/.'
+let limitProducts = 4;
+let tempArray;
 
 // Get current exchange from API
 async function getData() {
@@ -31,7 +32,7 @@ async function getData() {
     valorDolar = await dataJson.pen;
     await drawCarrito();
     await updateCartData();
-    await drawCards(allProducts);
+    await drawCards(allProducts, 1);
 }
 getData();
 
@@ -88,6 +89,24 @@ if (carritoJSON !== null) {
     })
 }
 
+// FUncion Busqueda
+function handleKeyPress(e) {
+    let key = e.keyCode || e.which;
+    if (key == 13) {
+        e.preventDefault();
+        searching(e);
+    }
+}
+
+function searching(event){
+    event.preventDefault()
+    let searchText = document.getElementById('inputSearch');
+    console.log(searchText.value); 
+    let productosFiltrados = allProducts.filter(product => product.name.toUpperCase().search(searchText.value.toUpperCase()) > -1)
+    drawCards(productosFiltrados, 1);
+    console.table(productosFiltrados);
+}
+
 // Colocando datos básicos del carrito
 function updateCartData() {
     let shopCarCount = document.getElementById('shopCarCountI');
@@ -116,7 +135,7 @@ function filterbyC(categoria) {
         brands.push(producto.brand);
         brands = [...new Set(brands)];
     })
-    drawCards(productosFiltrados);
+    drawCards(productosFiltrados, 1);
 
     // Generando las marcas de productos
     brandsHTML = document.querySelector('.brands__ul')
@@ -130,35 +149,81 @@ function filterbyC(categoria) {
 // Filtrando por categorías y marcas
 function filterbyCB(categoria, brand) {
     const productos = allProducts.filter(producto => producto.category === categoria && producto.brand === brand);
-    drawCards(productos, categoria)
+    drawCards(productos, 1)
 }
 
 // Funcion que convierte Arrays en los productos visibles
-function drawCards(array) {
+function drawCards(array, page) {
+    tempArray = array
     let productsHTML = document.querySelector('.cards--container');
+    let btnBack = document.getElementById('btnBack');
+    if (page <= 1) {
+        btnBack.innerHTML = `<button class="navButton"><i class="fa-solid fa-chevron-left"></i></button>`
+    } else {
+        btnBack.innerHTML = `<button class="navButton active" onclick="drawCards(tempArray, ${page - 1})"><i class="fa-solid fa-chevron-left"></i></button>`
+    }
+    let btnNext = document.getElementById('btnNext');
+    if ((array.length / limitProducts) > page) {
+        btnNext.innerHTML = `<button class="navButton active" id="btnNext" onclick="drawCards(tempArray, ${page + 1})"><i class="fa-solid fa-chevron-right"></i></button>`
+    } else {
+        btnNext.innerHTML = `<button class="navButton" id="btnNext"><i class="fa-solid fa-chevron-right"></i></button>`
+    }
+
     let productsInner = '';
-    array.forEach(producto => {
-        productsInner += `<article class="card">
-        <div class="imgContainer">
-            <div class="popUp">
+    n = ((page - 1) * limitProducts);
+    do {
+        let producto = array[n];
+        if (producto !== undefined) {
+            productsInner += `<article class="card">
+            <div class="imgContainer">
+                <div class="popUp">
+                </div>
+                <img src="${producto.img || 'https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg'}" alt="${producto.name}">
             </div>
-            <img src="${producto.img}" alt="${producto.name}">
-        </div>
-        <div class="card--data">
-            <h3>${producto.brand.toUpperCase()} ${producto.name.toUpperCase()}</h3>
-            <div class="score">
-                <i class="fa-solid fa-star gold"></i>
-                <i class="fa-solid fa-star gold"></i>
-                <i class="fa-solid fa-star gold"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+            <div class="card--data">
+                <h3>${producto.brand.toUpperCase()} ${producto.name.toUpperCase()}</h3>
+                <div class="score">
+                    <i class="fa-solid fa-star gold"></i>
+                    <i class="fa-solid fa-star gold"></i>
+                    <i class="fa-solid fa-star gold"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
             </div>
-        </div>
-        <button title="Agregar al carrito" category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.id}')" class="addToCart">
-            <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
-        </button>
-    </article>`
-    })
+            <button title="Agregar al carrito" category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.id}')" class="addToCart">
+                <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
+            </button>
+        </article>`
+            n++;
+        } else {
+            break;
+        }
+    } while (n <= (limitProducts * page - 1))
+    // array.forEach(producto => {
+    //     if (n <= (limitProducts * page)) {
+    //         productsInner += `<article class="card">
+    //     <div class="imgContainer">
+    //         <div class="popUp">
+    //         </div>
+    //         <img src="${producto.img}" alt="${producto.name}">
+    //     </div>
+    //     <div class="card--data">
+    //         <h3>${producto.brand.toUpperCase()} ${producto.name.toUpperCase()}</h3>
+    //         <div class="score">
+    //             <i class="fa-solid fa-star gold"></i>
+    //             <i class="fa-solid fa-star gold"></i>
+    //             <i class="fa-solid fa-star gold"></i>
+    //             <i class="fa-solid fa-star"></i>
+    //             <i class="fa-solid fa-star"></i>
+    //         </div>
+    //     </div>
+    //     <button title="Agregar al carrito" category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.id}')" class="addToCart">
+    //         <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
+    //     </button>
+    // </article>`
+    //         n++;
+    //     }
+    // })
     productsHTML.innerHTML = productsInner;
 }
 
