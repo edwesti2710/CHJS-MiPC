@@ -1,6 +1,6 @@
 // Preloader
 function fadeOutEffect(fadeTarget) {
-    var fadeEffect = setInterval(function () {
+    let fadeEffect = setInterval(function () {
         if (!fadeTarget.style.opacity) {
             fadeTarget.style.opacity = 1;
         }
@@ -30,9 +30,9 @@ async function getData() {
     const dataApi = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/pen.json');
     const dataJson = await dataApi.json();
     valorDolar = await dataJson.pen;
-    await drawCarrito();
-    await updateCartData();
-    await drawCards(allProducts, 1);
+    drawCarrito();
+    updateCartData();
+    drawCards(allProducts, 1);
 }
 getData();
 
@@ -76,20 +76,20 @@ const allProducts = [
     { id: 12, category: 'motherboard', name: 'H410M H', socket: 'LGA1200', brand: 'gigabyte', img: 'https://static.gigabyte.com/StaticFile/Image/Global/e24671ffd4e1db2b626ea6977d254e17/Product/25114/png/500', price0: 40, finalPrice() { return Math.ceil((this.price0 * valorDolar) * ganancia); } },
 ]
 // Variables de Usuario
-carrito = [];
+let carrito = [];
 
 // Recuperando datos del carrito
 let carritoJSON = localStorage.getItem('carritoJSON');
 // console.log(carritoJSON);
 if (carritoJSON !== null) {
-    carritoParsed = JSON.parse(carritoJSON)
+    let carritoParsed = JSON.parse(carritoJSON)
     carritoParsed.forEach(item => {
         // id, categoria, name, socket, brand, img, price0,c arrito)
         carrito.push(new Product(item.id, item.category, item.name, item.socket, item.brand, item.img, item.price0, item.carrito))
     })
 }
 
-// FUncion Busqueda
+// Funcion Busqueda
 function handleKeyPress(e) {
     let key = e.keyCode || e.which;
     if (key == 13) {
@@ -97,7 +97,6 @@ function handleKeyPress(e) {
         searching(e);
     }
 }
-
 function searching(event){
     event.preventDefault()
     let searchText = document.getElementById('inputSearch');
@@ -114,10 +113,10 @@ function updateCartData() {
 }
 
 // Agregando las categorías de los productos
-categoriasHTML = document.querySelector(".products__ul");
-categoriasInner = '';
+let categoriasHTML = document.querySelector(".products__ul");
+let categoriasInner = '';
 let categorias = []
-productos = '';
+let productos = '';
 allProducts.forEach(product => {
     categorias.push(product.category);
     categorias = [...new Set(categorias)];
@@ -138,8 +137,8 @@ function filterbyC(categoria) {
     drawCards(productosFiltrados, 1);
 
     // Generando las marcas de productos
-    brandsHTML = document.querySelector('.brands__ul')
-    brandsInner = '';
+    let brandsHTML = document.querySelector('.brands__ul')
+    let brandsInner = '';
     brands.forEach(brand => {
         brandsInner += `<li><a href="#" categoria = "${categoria}" id="btn${brand}" onclick="filterbyCB('${categoria}','${brand}')">${brand.toUpperCase()}</a></li>`
     })
@@ -199,31 +198,6 @@ function drawCards(array, page) {
             break;
         }
     } while (n <= (limitProducts * page - 1))
-    // array.forEach(producto => {
-    //     if (n <= (limitProducts * page)) {
-    //         productsInner += `<article class="card">
-    //     <div class="imgContainer">
-    //         <div class="popUp">
-    //         </div>
-    //         <img src="${producto.img}" alt="${producto.name}">
-    //     </div>
-    //     <div class="card--data">
-    //         <h3>${producto.brand.toUpperCase()} ${producto.name.toUpperCase()}</h3>
-    //         <div class="score">
-    //             <i class="fa-solid fa-star gold"></i>
-    //             <i class="fa-solid fa-star gold"></i>
-    //             <i class="fa-solid fa-star gold"></i>
-    //             <i class="fa-solid fa-star"></i>
-    //             <i class="fa-solid fa-star"></i>
-    //         </div>
-    //     </div>
-    //     <button title="Agregar al carrito" category="${producto.category}" brand="${producto.brand}" id="${producto.id}" onclick="addToCart('${producto.id}')" class="addToCart">
-    //         <h4>${localMoneda} ${producto.finalPrice()}<i class="fa-solid fa-cart-plus"></i></h4>
-    //     </button>
-    // </article>`
-    //         n++;
-    //     }
-    // })
     productsHTML.innerHTML = productsInner;
 }
 
@@ -235,7 +209,7 @@ function addToCart(id) {
         productoSeleccionado.carrito++;
     } else {
         carrito.push(allProducts.find(obj => obj.id == id))
-        productoSeleccionado = carrito.find(obj => obj.id == id)
+        let productoSeleccionado = carrito.find(obj => obj.id == id)
         // const getCount = parseInt(productoSeleccionado.carrito) || 0
         let getCount = parseInt(productoSeleccionado.carrito);
         isNaN(getCount) === true && (productoSeleccionado.carrito = 0);
@@ -257,7 +231,7 @@ function removeFromCart(id) {
 
 // Funcion que almacena el carrito en el localStorage
 function saveOnLocalStorage() {
-    carritoJSON = JSON.stringify(carrito);
+    let carritoJSON = JSON.stringify(carrito);
     localStorage.setItem('carritoJSON', carritoJSON);
 }
 
@@ -279,8 +253,8 @@ function showToastfyAlert(msj, duration) {
 
 // Funcion que dibuja el carrito desde el array
 function drawCarrito() {
-    carritoInner = ''
-    carritoHTML = document.querySelector('.cart')
+    let carritoInner = ''
+    let carritoHTML = document.querySelector('.cart')
     carrito.forEach(item => {
         carritoInner += `<div class="cartItem">
         <div class="imgContainer">
