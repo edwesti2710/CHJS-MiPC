@@ -56,7 +56,9 @@ class Product {
         this.img = img;
         this.price0 = price0;
         this.carrito = carrito;
-        this.finalPrice = function () { return Math.ceil((this.price0 * valorDolar) * ganancia); };
+    }
+    finalPrice() {
+        return Math.ceil((this.price0 * valorDolar) * ganancia);
     }
 }
 
