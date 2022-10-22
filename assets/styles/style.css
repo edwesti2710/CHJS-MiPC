@@ -507,8 +507,13 @@ main .rightAside .cartTotal #btnPagar:hover {
 }
 
 footer {
-  height: 24rem;
+  height: 4rem;
   background-color: #2994B2;
+  color: white;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=style.css.map */
